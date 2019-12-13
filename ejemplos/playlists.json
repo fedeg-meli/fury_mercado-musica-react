@@ -1,0 +1,31 @@
+[
+  {
+    "id": 1,
+    "name": "Playlist 1",
+    "description": "a description",
+    "tracks": [
+      {
+        "id": 1,
+        "name": "Adan y Eva",
+        "artist": "Paulo Londra",
+        "genre": "Trap",
+        "album": "Homerun",
+        "duration": "4:17",
+        "added": "12/11/2019 13:48",
+        "link": "",
+        "image": ""
+      },
+      {
+        "id": 2,
+        "name": "Tal vez",
+        "artist": "Paulo Londra",
+        "genre": "Trap",
+        "album": "Homerun",
+        "duration": "2:30",
+        "added": "12/11/2019 13:48",
+        "link": "",
+        "image": ""
+      }
+    ]
+  }
+]
