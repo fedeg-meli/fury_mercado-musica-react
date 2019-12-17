@@ -1,28 +1,47 @@
-import React from "react";
-import Button from "@andes/button";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { Component } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Login from "./containers/Login";
+import Home from "./containers/Home";
+import BlackBackground from "./components/shared/BlackBackground";
+import Playlist from "./containers/Playlist";
+import YoutubePlayer from "./components/YoutubePlayer";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <Button modifier="outline">Continue</Button>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  state = {
+    videoId: ""
+  };
+
+  loadYoutubeVideo = id => {
+    this.setState({
+      videoId: id
+    });
+  };
+
+  changeVideoToCat = () => {
+    this.setState({
+      videoId: "sW00p9VJ34A"
+    });
+  };
+
+  render() {
+    const { videoId } = this.state;
+    return (
+      <div className="App">
+        <YoutubePlayer
+          videoId={videoId}
+          changeVideoToCat={this.changeVideoToCat}
+        ></YoutubePlayer>
+        <BlackBackground />
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Login}></Route>
+            <Route exact path="/home" component={Home}></Route>
+            <Route exact path="/playlist/:id">
+              <Playlist loadYoutubeVideo={this.loadYoutubeVideo} />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </div>
+    );
+  }
 }
-
-export default App;
