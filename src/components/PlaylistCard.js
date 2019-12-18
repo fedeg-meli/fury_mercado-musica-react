@@ -41,10 +41,15 @@ const PlaylistDescription = styled.div`
 
 export default class PlaylistCard extends Component {
   render() {
-    const { name, description, gradient } = this.props;
+    const { id, name, description, gradient } = this.props;
     return (
       <PlaylistCardContainer>
-        <PlaylistCardHeader style={{ background: gradient }}>
+        <PlaylistCardHeader
+          style={{ background: gradient }}
+          onClick={() => {
+            document.location.href = `/playlist/${id}`;
+          }}
+        >
           {name}
         </PlaylistCardHeader>
         <PlaylistDescription>
