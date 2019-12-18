@@ -231,7 +231,7 @@ export default class Playlist extends Component {
           delay={5000}
         />
         {loading && <Spinner></Spinner>}
-        <AddMusic visible={addMusicModal} onClose={this.toggleAddMusicModal} />
+        <AddMusic visible={addMusicModal} playlistId={this.props.match.params.id} onClose={this.toggleAddMusicModal} />
         <Container>
           <Header>
             <h1 className="welcome-title">{name}</h1>

@@ -95,7 +95,8 @@ export default class AddMusic extends Component {
   saveSongInPlaylist = track => {
     this.clearFeedbackMessage();
     const user = getUserData();
-    const playlistId = this.props.match.params.id;
+    console.log(this.props.match);
+    const playlistId = this.props.playlistId;
     fetchRequest({
       method: "put",
       url: ENDPOINTS.saveSongPlaylist
