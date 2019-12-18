@@ -74,6 +74,7 @@ export default class PlaylistGrid extends Component {
           return (
             <PlaylistCard
               key={playlist.id}
+              id={playlist.id}
               name={playlist.name}
               description={playlist.description}
               gradient={gradients[index]}
