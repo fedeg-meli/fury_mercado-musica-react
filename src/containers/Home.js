@@ -71,7 +71,6 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
-    console.log(getUserData());
     this.setState({
       user: getUserData()
     });
@@ -85,10 +84,11 @@ export default class Home extends Component {
   };
 
   getPlaylists = () => {
+    const user = getUserData();
     this.toggleLoading();
     fetchRequest({
       method: "get",
-      url: ENDPOINTS.getPlaylists
+      url: ENDPOINTS.getPlaylists.replace(":id", user.id)
     })
       .then(response => {
         this.setState({
@@ -136,7 +136,7 @@ export default class Home extends Component {
     this.clearFeedbackMessage();
     fetchRequest({
       method: "post",
-      url: ENDPOINTS.createPlaylist,
+      url: ENDPOINTS.createPlaylist.replace(":id", this.state.user.id),
       data: newPlaylist
     })
       .then(() => {

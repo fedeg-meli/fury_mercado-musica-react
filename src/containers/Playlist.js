@@ -19,6 +19,7 @@ import { SomethingHappened } from "../components/shared/SomethingHappened";
 import SearchIcon from "../icons/search_icon.png";
 import DisconnectedIcon from "../icons/disconnected_icon.png";
 import AddMusic from "../components/AddMusic";
+import { getUserData } from "../helpers/getUserData";
 
 const Header = styled.div`
   color: #fff;
@@ -97,10 +98,14 @@ export default class Playlist extends Component {
       type: "success",
       message: "Tu playlist fue creada!",
       show: false
-    }
+    },
+    user: {}
   };
 
   componentDidMount() {
+    this.setState({
+      user: getUserData()
+    });
     this.getPlaylistData();
   }
 
@@ -132,9 +137,13 @@ export default class Playlist extends Component {
 
   getPlaylistData = id => {
     this.toggleLoading();
+    const playlistId = this.props.match.params.id;
+    const user = getUserData();
     fetchRequest({
       method: "get",
       url: ENDPOINTS.playlist
+        .replace(":id", user.id)
+        .replace(":playlistId", playlistId)
     })
       .then(response => {
         this.toggleLoading();
@@ -186,9 +195,14 @@ export default class Playlist extends Component {
   deleteSong = id => {
     this.toggleLoading();
     this.clearFeedbackMessage();
+    const user = getUserData();
+    const playlistId = this.props.match.params.id;
     fetchRequest({
-      method: "get",
-      url: ENDPOINTS.playlist401
+      method: "delete",
+      url: ENDPOINTS.deleteSongPlaylist
+        .replace(":id", user.id)
+        .replace(":playlistId", playlistId)
+        .replace(":trackId", id)
     })
       .then(response => {
         this.toggleLoading();

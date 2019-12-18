@@ -42,10 +42,8 @@ export default class Login extends Component {
   componentDidMount() {
     const ls = localStorage;
     const user = ls.getItem("user");
-    if (!user) {
-      this.props.history.push("/");
-    } else {
-      this.props.history.push("/home");
+    if (user) {
+      document.location.href = "/home";
     }
   }
 
@@ -102,7 +100,6 @@ export default class Login extends Component {
       }
     })
       .then(response => {
-        this.toggleLoading();
         this.login(response);
       })
       .catch(error => {
@@ -114,7 +111,7 @@ export default class Login extends Component {
   login = user => {
     const ls = localStorage;
     ls.setItem("user", JSON.stringify(user));
-    this.props.history.push("/home");
+    document.location.href = "/home";
   };
 
   render() {

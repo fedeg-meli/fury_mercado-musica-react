@@ -23,6 +23,11 @@ export default class App extends Component {
     });
   };
 
+  logout = () => {
+    localStorage.removeItem("user");
+    document.location.href = "/";
+  };
+
   render() {
     const { videoId } = this.state;
     return (
@@ -31,14 +36,18 @@ export default class App extends Component {
           videoId={videoId}
           changeVideoToCat={this.changeVideoToCat}
         ></YoutubePlayer>
-        <BlackBackground />
+        <BlackBackground logout={this.logout} />
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Login}></Route>
             <Route exact path="/home" component={Home}></Route>
-            <Route exact path="/playlist/:id">
-              <Playlist loadYoutubeVideo={this.loadYoutubeVideo} />
-            </Route>
+            <Route
+              exact
+              path="/playlist/:id"
+              render={props => (
+                <Playlist loadYoutubeVideo={this.loadYoutubeVideo} {...props} />
+              )}
+            ></Route>
           </Switch>
         </BrowserRouter>
       </div>

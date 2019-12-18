@@ -15,8 +15,18 @@ const DEV = {
   saveSongPlaylist401: "http://www.mocky.io/v2/5df8d9a6300000042d889fd3"
 };
 
-const PROD = {};
+const GO = "http://localhost:8085";
 
-const ENV = "dev";
+const PROD = {
+  login: `${GO}/login`, // to login user
+  getPlaylists: `${GO}/user/:id/playlists`,
+  createPlaylist: `${GO}/user/:id/playlists`,
+  playlist: `${GO}/user/:id/playlists/:playlistId`,
+  saveSongPlaylist: `${GO}/user/:id/playlists/:playlistId/tracks/:trackId`,
+  deleteSongPlaylist: `${GO}/user/:id/playlists/:playlistId/tracks/:trackId`,
+  tracks: "http://localhost:8085/tracks"
+};
+
+const ENV = "prod";
 
 export default ENV === "dev" ? DEV : PROD;

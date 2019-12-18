@@ -4,6 +4,7 @@ import Modal from "@andes/modal";
 import Snackbar from "@andes/snackbar";
 import { fetchRequest } from "../helpers/navigation";
 import ENDPOINTS from "../helpers/ENDPOINTS";
+import { getUserData } from "../helpers/getUserData";
 
 const TracksGrid = styled.div`
   display: grid;
@@ -93,9 +94,14 @@ export default class AddMusic extends Component {
 
   saveSongInPlaylist = track => {
     this.clearFeedbackMessage();
+    const user = getUserData();
+    const playlistId = this.props.match.params.id;
     fetchRequest({
-      method: "post",
+      method: "put",
       url: ENDPOINTS.saveSongPlaylist
+        .replace(":id", user.id)
+        .replace(":playlistId", playlistId)
+        .replace(":trackId", track.id)
     })
       .then(response => {
         this.setState(prevState => ({
@@ -119,7 +125,7 @@ export default class AddMusic extends Component {
   getMusic = () => {
     fetchRequest({
       method: "get",
-      url: ENDPOINTS.tracksMany
+      url: ENDPOINTS.tracks
     }).then(response => {
       this.setState({
         tracks: response
