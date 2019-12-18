@@ -19,11 +19,11 @@ const GO = "http://localhost:8085";
 
 const PROD = {
   login: `${GO}/login`, // to login user
-  getPlaylists: `${GO}/user/:id/playlists`,
-  createPlaylist: `${GO}/user/:id/playlists`,
-  playlist: `${GO}/user/:id/playlists/:playlistId`,
-  saveSongPlaylist: `${GO}/user/:id/playlists/:playlistId/tracks/:trackId`,
-  deleteSongPlaylist: `${GO}/user/:id/playlists/:playlistId/tracks/:trackId`,
+  getPlaylists: `${GO}/users/:id/playlists`,
+  createPlaylist: `${GO}/users/:id/playlists`,
+  playlist: `${GO}/users/:id/playlists/:playlistId`,
+  saveSongPlaylist: `${GO}/users/:id/playlists/:playlistId/tracks/:trackId`,
+  deleteSongPlaylist: `${GO}/users/:id/playlists/:playlistId/tracks/:trackId`,
   tracks: "http://localhost:8085/tracks"
 };
 
